@@ -1,14 +1,20 @@
 import { Suspense } from "react";
-import Products from "./Products";
+import { getProducts } from "../lib/useProducts";
 
-export default function ProductList() {
-  //const products = getProducts();
+export default async function ProductList() {
+  const products = await getProducts();
   return (
     <>
       <h1>Product List</h1>
-      <Suspense fallback={<div>Loading...</div>}>
-        {/* <Products products={products} /> */}
-      </Suspense>
+      <div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ul>
+            {products.map((product) => (
+              <li key={product.id}>{product.title}</li>
+            ))}
+          </ul>
+        </Suspense>
+      </div>
     </>
   );
 }

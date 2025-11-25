@@ -1,6 +1,7 @@
 export async function GET() {
-  const res = await fetch("https://dummyjson.com/test");
+  const res = await fetch("https://dummyjson.com/products");
   const data = await res.json();
+  const stringData = JSON.stringify(data);
 
-  return Response.json({ data });
+  return new Response(stringData);
 }
